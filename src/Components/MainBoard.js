@@ -4,10 +4,13 @@ import Product from "./Product";
 import AddToCart from "./AddToCart";
 import Button from "@material-ui/core/Button";
 
-function MainBoard({ products }) {
-
+function MainBoard({ products ,filterProducts ,getSelectType}) {
     const [type, setType] = useState("");
-
+    
+        const getType = (e) =>{
+            setType(e.currentTarget.value);
+            getSelectType(e.currentTarget.value)
+        }
     
    return (
       <Container>
@@ -21,8 +24,9 @@ function MainBoard({ products }) {
                      name="type" 
                      id="types"  
                      value={type}
-                     onChange={e => setType(e.currentTarget.value)}>
-                        <option value="t-shirt<">t-shirt</option>
+                     onChange={e => getType(e)}>
+                        <option value=""></option>
+                        <option value="t-shirt">t-shirt</option>
                         <option value="dress shirts">dress shirts </option>
                      </select>
                     
@@ -32,7 +36,10 @@ function MainBoard({ products }) {
             </Options>
          </Header>
          <Body>
-         { products.map(( product)=>(<Product key={product.id} product={product} />))}
+         {type == "" ? products.map(( product)=>(<Product key={product.id} product={product} />)) 
+         :
+         filterProducts.map(( product)=>(<Product key={product.id} product={product} />)) 
+          }
         
          </Body>
       </Container>
@@ -42,6 +49,7 @@ function MainBoard({ products }) {
 export default MainBoard;
 const Container = styled.div`
    background: white;
+   padding: 20px;
 `;
 const Header = styled.div`
    display: flex;

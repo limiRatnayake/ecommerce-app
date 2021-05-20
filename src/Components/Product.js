@@ -42,7 +42,7 @@ export default function ImgMediaCard({product}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Button variant="contained" color="primary" disableElevation>
+      <Button variant="contained" color="primary" style={{backgroundColor: "black"}} disableElevation >
             Add To Cart
         </Button>
       </CardActions>
